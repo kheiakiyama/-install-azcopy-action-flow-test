@@ -2,7 +2,7 @@ name: "release"
 on: # rebuild master branch changes
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
