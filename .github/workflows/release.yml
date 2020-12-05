@@ -1,0 +1,26 @@
+name: "release"
+on: # rebuild master branch changes
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: kheiakiyama/install-azcopy-action@v1
+      with: 
+        version: 'v10'
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - run: |
+        azcopy --version | grep 'azcopy'
+        azcopy_v10 --version | grep 'azcopy'
+        which azcopy_v10
+        touch testfile
+        azcopy_v10 copy ./testfile https://$AZCOPY_TEST_STORAGE.blob.core.windows.net/$AZCOPY_TEST_CONTAINER/$AZCOPY_TEST_BLOB_DEST --overwrite=true
+      env:
+        AZCOPY_TEST_STORAGE: "installazcopyactiontest"
+        AZCOPY_TEST_CONTAINER: "install-azcopy-action-flow-test"
+        AZCOPY_TEST_BLOB_DEST: "testfile"

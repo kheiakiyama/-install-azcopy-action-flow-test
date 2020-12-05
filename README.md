@@ -1,2 +1,2 @@
-# -install-azcopy-action-flow-test
+# install-azcopy-action-flow-test
 test for install-azcopy-action
