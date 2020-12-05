@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: kheiakiyama/install-azcopy-action@v1
+    - uses: kheiakiyama/install-azcopy-action@v1.0.2
       with: 
         version: 'v10'
         creds: ${{ secrets.AZURE_CREDENTIALS }}
